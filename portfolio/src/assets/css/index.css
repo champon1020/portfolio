@@ -1,0 +1,71 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+ul,
+li,
+form,
+label,
+footer,
+header,
+input,
+button,
+nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  transition: opacity 0.2s ease-out;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  outline: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  font-family: "arial";
+  transition: opacity 0.2s ease-out;
+
+  --base-color: rgb(54, 59, 75);
+  --hoverred-color: yellow;
+  --hoverred-opacity: 0.6;
+  --border-color: lightgray;
+  --hoverred-background-color: rgb(245, 245, 255);
+}
+
+ul {
+  list-style: none;
+}
+
+.inlineCode {
+  background-color: lightgray;
+  display: inline;
+}
