@@ -1,0 +1,15 @@
+[
+  {
+    "organization": "Keio University",
+    "degree": "Master",
+    "department": "Integrated Design Engineer",
+    "startDate": "Spring 2021"
+  },
+  {
+    "organization": "Keio University",
+    "degree": "Bachelor",
+    "department": "Electronic and Information Engineering",
+    "startDate": "Spring 2017",
+    "endDate": "March 2021"
+  }
+]

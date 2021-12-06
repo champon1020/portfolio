@@ -1,0 +1,18 @@
+[
+  {
+    "iconSrc": "/icons/github.svg",
+    "url": "https://github.com/champon1020"
+  },
+  {
+    "iconSrc": "/icons/linkedin.svg",
+    "url": "https://www.linkedin.com/in/champon1020/"
+  },
+  {
+    "iconSrc": "/icons/twitter.svg",
+    "url": "https://twitter.com/champon1020"
+  },
+  {
+    "iconSrc": "/icons/zenn.svg",
+    "url": "https://zenn.dev/champon1020"
+  }
+]

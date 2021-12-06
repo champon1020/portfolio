@@ -1,0 +1,42 @@
+[
+  {
+    "organization": "National Institute of Advanced Industrial Science and Technology (AIST)",
+    "role": "Research Assistant",
+    "startDate": "June 2021",
+    "description": "Major in machine learning, espacially computer vision field. Research on scene graph generation."
+  },
+  {
+    "organization": "Mixi, Inc.",
+    "role": "Software Engineer (Internship)",
+    "startDate": "October 2021",
+    "endDate": "December 2021",
+    "description": "Developed an audio mixer, which mixes multiple sounds, using C++ with Rivermax."
+  },
+  {
+    "organization": "Mercari, Inc.",
+    "role": "Software Engineer (Internship)",
+    "startDate": "August 2021",
+    "endDate": "September 2021",
+    "description": "Worked as a backend engineer at Merpay. Presentation: <a href=\"https://speakerdeck.com/champon1020/mercari-summer-internship-2021-final-presentation\" target=\"_blank\">link</a>"
+  },
+  {
+    "organization": "Mercari, Inc.",
+    "role": "Software Engineer (Internship)",
+    "startDate": "September 2020",
+    "endDate": "September 2020 (5 days)",
+    "description": "Participated in Online Summer Internship for Gophers 2020. Developed a static analisys tool for Go language."
+  },
+  {
+    "organization": "TeamLab",
+    "role": "Software Engineer (Internship)",
+    "startDate": "September 2019",
+    "endDate": "September 2019 (2 weeks)",
+    "description": "Developed a management page for clients using Vue with Typescript."
+  },
+  {
+    "organization": "Nojima Infotech",
+    "role": "Software Engineer (Internship)",
+    "startDate": "March 2019",
+    "endDate": "October 2019"
+  }
+]

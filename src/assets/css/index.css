@@ -1,0 +1,76 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+ul,
+li,
+form,
+label,
+footer,
+header,
+input,
+button,
+nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  transition: opacity 0.2s ease-out;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  outline: none;
+}
+
+@font-face {
+  font-mamily: "myfont";
+  src: local("myfont"),
+    url("https://storage.googleapis.com/champon-portfolio/SAOUITT-Regular.woff2");
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  //background-color: rgb(255, 255, 255);
+  background-color: white;
+  font-family: arial;
+  //transition: opacity 0.2s ease-out;
+}
+
+ul {
+  list-style: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
