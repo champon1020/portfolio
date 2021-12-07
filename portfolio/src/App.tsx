@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "./pages/Main";
+
+import Portfolio from "./pages/Portfolio";
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/" element={<Portfolio />} />
     </Routes>
   );
 };
