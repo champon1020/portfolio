@@ -27,6 +27,11 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg|woff|woff2|ttf)$/i,
         loader: "file-loader",
       },
+      {
+        test: /\.(glsl|vert|frag)$/,
+        use: [{ loader: "webpack-glsl-loader" }],
+        exclude: /node_modules/,
+      },
     ],
   },
   devtool: "eval-source-map",
