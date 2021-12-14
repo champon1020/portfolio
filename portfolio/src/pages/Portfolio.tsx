@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import * as THREE from "three";
+import {
+  TextGeometry,
+  TextGeometryParameters,
+} from "three/examples/jsm/geometries/TextGeometry";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 
 import ProfileImage from "../assets/images/profile.png";
 import fragmentShader from "../glsl/fragment.glsl";
@@ -78,6 +83,13 @@ type UniformsType = {
   uTime: { value: number };
 };
 
+const tanh = (x: number) => {
+  return (
+    (Math.pow(Math.E, x) - Math.pow(Math.E, -x)) /
+    (Math.pow(Math.E, x) + Math.pow(Math.E, -x))
+  );
+};
+
 const Portfolio = () => {
   const uniforms = {
     uTime: {
@@ -85,18 +97,91 @@ const Portfolio = () => {
     },
   };
 
-  const createMesh = (w: number, h: number) => {
-    const geometry = new THREE.PlaneGeometry(w, h * 2, 64, 64);
+  const createMesh = (
+    w: number,
+    h: number,
+    init: {
+      position: { x: number; y: number; z: number };
+      rotation: { x: number; y: number; z: number };
+    }
+  ) => {
+    const width = w * 3;
+    const height = h;
+    const widthVertex = 256;
+    const heightVertex = 64;
+    const geometry = new THREE.PlaneGeometry(
+      width,
+      height,
+      widthVertex,
+      heightVertex
+    );
     const positions = geometry.attributes.position.array as Array<number>;
     for (let i = 0; i < positions.length; i += 3) {
-      positions[i + 2] = Math.sin(i / 1000) * 50;
+      const x = (widthVertex * 2) / 5 - ((i / 3) % (widthVertex + 1));
+      positions[i + 2] = tanh((x / widthVertex) * 25) * 100;
     }
-    const material = new THREE.MeshBasicMaterial({ wireframe: true });
+    const colors = [];
+    const color = new THREE.Color();
+    for (let i = 0; i < positions.length; i += 3) {
+      color.setRGB(245, 176, 65);
+      colors.push(color.r, color.g, color.b);
+    }
+    geometry.setAttribute(
+      "color",
+      new THREE.BufferAttribute(new Uint8Array(colors), 3, true)
+    );
+
+    const material = new THREE.MeshLambertMaterial({
+      wireframe: true,
+      vertexColors: true,
+      side: THREE.DoubleSide,
+    });
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.z = -Math.PI / 2;
-    mesh.rotation.x = -Math.PI / 3;
-    mesh.position.x = -w;
-    mesh.position.y = -h;
+    mesh.rotation.x = init.rotation.x;
+    mesh.rotation.y = init.rotation.y;
+    mesh.rotation.z = init.rotation.z;
+    mesh.position.x = init.position.x;
+    mesh.position.y = init.position.y;
+    mesh.position.z = init.position.z;
+    return mesh;
+  };
+
+  const createRightWaveMesh = (w: number, h: number) => {
+    const width = w * 3;
+    const height = h;
+    const widthVertex = 256;
+    const heightVertex = 64;
+
+    const geometry = new THREE.PlaneGeometry(
+      width,
+      height,
+      widthVertex,
+      heightVertex
+    );
+    const positions = geometry.attributes.position.array as Array<number>;
+    for (let i = 0; i < positions.length; i += 3) {
+      const x = (widthVertex * 2) / 5 - ((i / 3) % (widthVertex + 1));
+      positions[i + 2] = Math.pow(Math.E, -(x / widthVertex) * 5) * 100 - 300;
+    }
+    const colors = [];
+    const color = new THREE.Color();
+    for (let i = 0; i < positions.length; i += 3) {
+      color.setRGB(231, 76, 60);
+      colors.push(color.r, color.g, color.b);
+    }
+    geometry.setAttribute(
+      "color",
+      new THREE.BufferAttribute(new Uint8Array(colors), 3, true)
+    );
+
+    const material = new THREE.MeshLambertMaterial({
+      wireframe: true,
+      vertexColors: true,
+      side: THREE.DoubleSide,
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(0, -100, 0);
+    mesh.rotation.set(-Math.PI / 6, 0, 0);
     return mesh;
   };
 
@@ -115,18 +200,35 @@ const Portfolio = () => {
     const fovRad = (fov / 2) * (Math.PI / 180);
     const dist = h / 2 / Math.tan(fovRad);
     const camera = new THREE.PerspectiveCamera(fov, w / h, 1, dist * 2);
-    camera.position.z = dist;
+    camera.position.set(0, 0, dist);
 
-    const light = new THREE.PointLight(0x000000);
-    light.position.set(400, 400, 400);
+    const light = new THREE.SpotLight(0xffffff, 3, -10, -Math.PI / 4, 10, 0.5);
+    light.position.set(-w * (9 / 11), h * (7 / 5), -10);
 
-    const mesh = createMesh(w, h);
+    const leftMesh = createMesh(w, h, {
+      position: { x: 0, y: -100, z: 0 },
+      rotation: { x: -Math.PI / 6, y: 0, z: 0 },
+    });
+
+    const rightMesh = createRightWaveMesh(w, h);
+
+    const loader = new FontLoader();
+    loader.load(
+      "https://storage.googleapis.com/champon-portfolio/SAO_UI_BOLD.json",
+      (font) => {
+        const textGeo = new TextGeometry("HELLO", { font: font });
+        const textMat = new THREE.MeshLambertMaterial();
+        const mesh = new THREE.Mesh(textGeo, textMat);
+        scene.add(mesh);
+      }
+    );
 
     const scene = new THREE.Scene();
     scene.add(light);
-    scene.add(mesh);
+    scene.add(leftMesh);
+    scene.add(rightMesh);
 
-    render(renderer, camera, light, mesh, scene);
+    render(renderer, camera, light, leftMesh, scene);
   }, []);
 
   const render = (
@@ -139,12 +241,14 @@ const Portfolio = () => {
     requestAnimationFrame(() => {
       render(renderer, camera, light, mesh, scene);
     });
+    /*
     if (mesh.rotation.x < 0) {
-      mesh.position.x += 10;
       mesh.position.y += 3;
       mesh.position.z += 2;
       mesh.rotation.x += Math.PI / 360;
+    mesh.position.x -= 3;
     }
+    */
     renderer.render(scene, camera);
   };
 
