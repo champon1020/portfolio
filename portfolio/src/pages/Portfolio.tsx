@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import * as THREE from "three";
 import {
   TextGeometry,
   TextGeometryParameters,
 } from "three/examples/jsm/geometries/TextGeometry";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { Font, FontLoader } from "three/examples/jsm/loaders/FontLoader";
 
 import ProfileImage from "../assets/images/profile.png";
 import fragmentShader from "../glsl/fragment.glsl";
@@ -79,109 +79,73 @@ const StyledProfileImg = styled.img`
   width: 100%;
 `;
 
-type UniformsType = {
-  uTime: { value: number };
-};
-
-const tanh = (x: number) => {
-  return (
-    (Math.pow(Math.E, x) - Math.pow(Math.E, -x)) /
-    (Math.pow(Math.E, x) + Math.pow(Math.E, -x))
-  );
-};
+const S = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ";
 
 const Portfolio = () => {
-  const uniforms = {
-    uTime: {
-      value: 0.0,
-    },
-  };
-
-  const createMesh = (
-    w: number,
-    h: number,
-    init: {
-      position: { x: number; y: number; z: number };
-      rotation: { x: number; y: number; z: number };
-    }
+  const createRandomTextGeometry = (
+    font: Font,
+    fontSize: number,
+    nColumns: number,
+    nWords: number,
+    ratio: number,
+    color: Array<number>
   ) => {
-    const width = w * 3;
-    const height = h;
-    const widthVertex = 256;
-    const heightVertex = 64;
-    const geometry = new THREE.PlaneGeometry(
-      width,
-      height,
-      widthVertex,
-      heightVertex
-    );
+    let word = "";
+    for (let i = 0; i < nColumns; i++) {
+      if (i != 0) {
+        word += "\n";
+      }
+      word += Array.from(Array(nWords))
+        .map(
+          () =>
+            S[
+              Math.floor(
+                Math.random() < ratio
+                  ? Math.random() * (S.length - 1)
+                  : S.length - 1
+              )
+            ]
+        )
+        .join("");
+    }
+    const geometry = new TextGeometry(word, {
+      font: font,
+      size: fontSize,
+      height: 0,
+    });
+
+    // Set positions and colors.
+    const colorBuff = new THREE.Color();
+    const colors = [];
     const positions = geometry.attributes.position.array as Array<number>;
     for (let i = 0; i < positions.length; i += 3) {
-      const x = (widthVertex * 2) / 5 - ((i / 3) % (widthVertex + 1));
-      positions[i + 2] = tanh((x / widthVertex) * 25) * 100;
-    }
-    const colors = [];
-    const color = new THREE.Color();
-    for (let i = 0; i < positions.length; i += 3) {
-      color.setRGB(245, 176, 65);
-      colors.push(color.r, color.g, color.b);
+      positions[i + 2] -= 1000;
+      colorBuff.setRGB(color[0], color[1], color[2]);
+      colors.push(colorBuff.r, colorBuff.g, colorBuff.b);
     }
     geometry.setAttribute(
       "color",
       new THREE.BufferAttribute(new Uint8Array(colors), 3, true)
     );
 
-    const material = new THREE.MeshLambertMaterial({
-      wireframe: true,
-      vertexColors: true,
-      side: THREE.DoubleSide,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = init.rotation.x;
-    mesh.rotation.y = init.rotation.y;
-    mesh.rotation.z = init.rotation.z;
-    mesh.position.x = init.position.x;
-    mesh.position.y = init.position.y;
-    mesh.position.z = init.position.z;
-    return mesh;
+    return geometry;
   };
 
-  const createRightWaveMesh = (w: number, h: number) => {
-    const width = w * 3;
-    const height = h;
-    const widthVertex = 256;
-    const heightVertex = 64;
-
-    const geometry = new THREE.PlaneGeometry(
-      width,
-      height,
-      widthVertex,
-      heightVertex
+  const createTextMesh = (w: number, h: number, font: Font) => {
+    const geometry = createRandomTextGeometry(
+      font,
+      60,
+      20,
+      200,
+      0.3,
+      [246, 190, 0]
     );
-    const positions = geometry.attributes.position.array as Array<number>;
-    for (let i = 0; i < positions.length; i += 3) {
-      const x = (widthVertex * 2) / 5 - ((i / 3) % (widthVertex + 1));
-      positions[i + 2] = Math.pow(Math.E, -(x / widthVertex) * 5) * 100 - 300;
-    }
-    const colors = [];
-    const color = new THREE.Color();
-    for (let i = 0; i < positions.length; i += 3) {
-      color.setRGB(231, 76, 60);
-      colors.push(color.r, color.g, color.b);
-    }
-    geometry.setAttribute(
-      "color",
-      new THREE.BufferAttribute(new Uint8Array(colors), 3, true)
-    );
-
     const material = new THREE.MeshLambertMaterial({
-      wireframe: true,
       vertexColors: true,
       side: THREE.DoubleSide,
     });
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.set(0, -100, 0);
-    mesh.rotation.set(-Math.PI / 6, 0, 0);
+    mesh.position.set(-w * (3 / 2), h, 0);
     return mesh;
   };
 
@@ -189,6 +153,7 @@ const Portfolio = () => {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
+    const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(w, h);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -199,57 +164,59 @@ const Portfolio = () => {
     const fov = 60;
     const fovRad = (fov / 2) * (Math.PI / 180);
     const dist = h / 2 / Math.tan(fovRad);
-    const camera = new THREE.PerspectiveCamera(fov, w / h, 1, dist * 2);
+    const camera = new THREE.PerspectiveCamera(fov, w / h, 1, dist * 5);
     camera.position.set(0, 0, dist);
 
-    const light = new THREE.SpotLight(0xffffff, 3, -10, -Math.PI / 4, 10, 0.5);
-    light.position.set(-w * (9 / 11), h * (7 / 5), -10);
+    const light = new THREE.SpotLight(0xffffff, 2, 0, Math.PI / 3, 5, 1.0);
+    light.position.set(0, 0, -10);
+    scene.add(light);
+    const lightHelper = new THREE.SpotLightHelper(light);
+    scene.add(lightHelper);
 
-    const leftMesh = createMesh(w, h, {
-      position: { x: 0, y: -100, z: 0 },
-      rotation: { x: -Math.PI / 6, y: 0, z: 0 },
-    });
-
-    const rightMesh = createRightWaveMesh(w, h);
-
+    let mesh = undefined;
     const loader = new FontLoader();
     loader.load(
-      "https://storage.googleapis.com/champon-portfolio/SAO_UI_BOLD.json",
+      "https://storage.googleapis.com/champon-portfolio/SAO_UI_Regular.json",
       (font) => {
-        const textGeo = new TextGeometry("HELLO", { font: font });
-        const textMat = new THREE.MeshLambertMaterial();
-        const mesh = new THREE.Mesh(textGeo, textMat);
+        mesh = createTextMesh(w, h, font);
         scene.add(mesh);
+        render(0, renderer, camera, light, mesh, scene, font);
       }
     );
-
-    const scene = new THREE.Scene();
-    scene.add(light);
-    scene.add(leftMesh);
-    scene.add(rightMesh);
-
-    render(renderer, camera, light, leftMesh, scene);
   }, []);
 
   const render = (
+    time: number,
     renderer: THREE.Renderer,
     camera: THREE.Camera,
     light: THREE.Light,
     mesh: THREE.Mesh,
-    scene: THREE.Scene
+    scene: THREE.Scene,
+    font: Font
   ) => {
-    requestAnimationFrame(() => {
-      render(renderer, camera, light, mesh, scene);
-    });
-    /*
-    if (mesh.rotation.x < 0) {
-      mesh.position.y += 3;
-      mesh.position.z += 2;
-      mesh.rotation.x += Math.PI / 360;
-    mesh.position.x -= 3;
+    if (time <= 25) {
+      mesh.geometry.dispose();
+      scene.remove(mesh);
+      const geometry = createRandomTextGeometry(
+        font,
+        60,
+        20,
+        200,
+        (5 - Math.sqrt(time)) * 0.1,
+        [246, 190, 0]
+      );
+      const material = new THREE.MeshLambertMaterial({
+        vertexColors: true,
+        side: THREE.DoubleSide,
+      });
+      const newMesh = new THREE.Mesh(geometry, material);
+      newMesh.position.set(-window.innerWidth * (3 / 2), window.innerHeight, 0);
+      scene.add(newMesh);
+      requestAnimationFrame(() => {
+        render(time + 1, renderer, camera, light, newMesh, scene, font);
+      });
+      renderer.render(scene, camera);
     }
-    */
-    renderer.render(scene, camera);
   };
 
   return (
