@@ -6,6 +6,7 @@ import {
   TextGeometryParameters,
 } from "three/examples/jsm/geometries/TextGeometry";
 import { Font, FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { Text } from "troika-three-text";
 
 import ProfileImage from "../assets/images/profile.png";
 import fragmentShader from "../glsl/fragment.glsl";
@@ -79,7 +80,7 @@ const StyledProfileImg = styled.img`
   width: 100%;
 `;
 
-const S = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ";
+const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ";
 
 const Portfolio = () => {
   const createRandomTextGeometry = (
@@ -91,10 +92,17 @@ const Portfolio = () => {
     color: Array<number>
   ) => {
     let word = "";
+    const rnd = Math.floor(Math.random() * (S.length - 1));
+
+    const start = performance.now();
+    /*
     for (let i = 0; i < nColumns; i++) {
       if (i != 0) {
         word += "\n";
       }
+      word += Array.from(Array(nWords))
+        .map(() => S[rnd])
+        .join("");
       word += Array.from(Array(nWords))
         .map(
           () =>
@@ -108,6 +116,13 @@ const Portfolio = () => {
         )
         .join("");
     }
+    */
+    for (let i = 0; i < nWords * 10; i++) {
+      word += " " + S.charAt(Math.floor(Math.random() * S.length));
+    }
+    const end = performance.now();
+    console.log(end - start);
+
     const geometry = new TextGeometry(word, {
       font: font,
       size: fontSize,
@@ -134,9 +149,9 @@ const Portfolio = () => {
   const createTextMesh = (w: number, h: number, font: Font) => {
     const geometry = createRandomTextGeometry(
       font,
-      60,
+      40,
       20,
-      200,
+      100,
       0.3,
       [246, 190, 0]
     );
@@ -173,6 +188,18 @@ const Portfolio = () => {
     const lightHelper = new THREE.SpotLightHelper(light);
     scene.add(lightHelper);
 
+    /*
+    const t = new Text();
+    scene.add(t);
+    t.text = "Hello World Good!";
+    t.font =
+      "https://storage.googleapis.com/champon-portfolio/SAO_UI_Regular.json";
+    t.fontSize = 20;
+    t.anchorX = 100;
+    t.anchorY = 100;
+    t.color = 0xffffff;
+    */
+
     let mesh = undefined;
     const loader = new FontLoader();
     loader.load(
@@ -199,9 +226,9 @@ const Portfolio = () => {
       scene.remove(mesh);
       const geometry = createRandomTextGeometry(
         font,
-        60,
+        40,
         20,
-        200,
+        100,
         (5 - Math.sqrt(time)) * 0.1,
         [246, 190, 0]
       );
