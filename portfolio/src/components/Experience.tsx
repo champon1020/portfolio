@@ -26,7 +26,7 @@ const Experience = (props: Props) => {
         startYear={2021}
         isPresent={true}
         discription={
-          "Machine Learning, Computer Vision. I'm studying abound video scene graph generation."
+          "Machine Learning, Computer Vision. I'm studying about video scene graph generation."
         }
       />
       <ExperienceItem
@@ -46,6 +46,9 @@ const Experience = (props: Props) => {
         endMonth={"September"}
         endYear={2021}
         discription={"Summer internship as backend engineer at Merpay."}
+        link={
+          "https://speakerdeck.com/champon1020/mercari-summer-internship-2021-final-presentation"
+        }
       />
       <ExperienceItem
         workplace={"Mercari, Inc."}

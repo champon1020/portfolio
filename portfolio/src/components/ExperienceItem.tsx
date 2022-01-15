@@ -21,6 +21,7 @@ type Props = {
   endYear?: number;
   isPresent?: boolean;
   discription?: string;
+  link?: string;
 };
 
 const ExperienceItem = (props: Props) => {
@@ -33,6 +34,7 @@ const ExperienceItem = (props: Props) => {
     endYear,
     isPresent,
     discription,
+    link,
   } = props;
 
   return (
@@ -46,7 +48,7 @@ const ExperienceItem = (props: Props) => {
         endYear={endYear}
         isPresent={isPresent}
       />
-      <Discription value={discription} />
+      <Discription value={discription} link={link} />
     </StyledContainer>
   );
 };
