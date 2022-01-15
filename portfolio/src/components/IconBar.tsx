@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import configData from "../configs/config.json";
 import IconBarItem from "./IconBarItem";
 
 const StyledBar = styled.ul`
@@ -9,12 +10,19 @@ const StyledBar = styled.ul`
   margin-top: 5%;
 `;
 
-const baseUrl = "https://storage.googleapis.com/champon-portfolio/icons";
-
 const linkList = [
-  { src: `${baseUrl}/github.png`, url: "https://github.com/champon1020" },
-  { src: `${baseUrl}/linkedin.png`, url: "https://github.com/champon1020" },
-  { src: `${baseUrl}/twitter2.png`, url: "https://github.com/champon1020" },
+  {
+    src: `${configData.GCS_BASEURL}/icons/github.png`,
+    url: configData.LINKS.GITHUB,
+  },
+  {
+    src: `${configData.GCS_BASEURL}/icons/linkedin.png`,
+    url: configData.LINKS.LINKEDIN,
+  },
+  {
+    src: `${configData.GCS_BASEURL}/icons/twitter2.png`,
+    url: configData.LINKS.TWITTER,
+  },
 ];
 
 const IconBar = () => {

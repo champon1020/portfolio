@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import IconBar from "../components/IconBar";
+import configData from "../configs/config.json";
 import GlobalFonts from "../GlobalFonts";
 
 const StyledContainer = styled.div`
@@ -36,13 +37,11 @@ const StyledSubTitle = styled.h2`
   font-size: 8rem;
 `;
 
-const baseUrl = "https://storage.googleapis.com/champon-portfolio/images";
-
 const Top = () => {
   return (
     <StyledContainer>
       <GlobalFonts />
-      <StyledImage src={`${baseUrl}/space.jpg`} />
+      <StyledImage src={`${configData.GCS_BASEURL}/images/space.jpg`} />
       <StyledBlank />
       <StyledTitle>Yoshiki Nagasaki</StyledTitle>
       <StyledSubTitle>champon</StyledSubTitle>

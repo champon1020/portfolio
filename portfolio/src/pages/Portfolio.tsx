@@ -1,15 +1,15 @@
 import React from "react";
 import ReactPageScroller from "react-page-scroller";
 
-import Experience from "./Experience";
+import Second from "./Second";
 import Top from "./Top";
 
 const Portfolio = () => {
   return (
     <>
       <ReactPageScroller>
+        <Second />
         <Top />
-        <Experience />
       </ReactPageScroller>
     </>
   );
