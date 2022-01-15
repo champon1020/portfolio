@@ -7,21 +7,21 @@ const StyledContainer = styled.div`
 `;
 
 const StyledValue = styled.p`
-  font-size: 2rem;
+  font-size: 1.6rem;
 `;
 
 type Props = {
-  role?: string;
+  value: string;
 };
 
-const Role = (props: Props) => {
-  const { role } = props;
+const Discription = (props: Props) => {
+  const { value } = props;
 
   return (
     <StyledContainer>
-      <StyledValue>{role}</StyledValue>
+      <StyledValue>{value}</StyledValue>
     </StyledContainer>
   );
 };
 
-export default Role;
+export default Discription;

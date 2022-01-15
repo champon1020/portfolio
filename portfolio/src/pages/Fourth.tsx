@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Heading from "../atoms/Heading";
-import Experience from "../components/Experience";
+import Activities from "../components/Activities";
 import configData from "../configs/config.json";
 
 const StyledContainer = styled.div`
@@ -21,25 +21,19 @@ const StyledContent = styled.div`
   width: 50%;
   background-color: white;
   padding: 4rem;
-  background-color: lightslategray;
+  background-color: #769b76;
 `;
 
-const StyledHeading = styled.h3`
-  font-size: 6rem;
-  display: inline;
-  border-bottom: solid 0.2rem black;
-`;
-
-const Second = () => {
+const Third = () => {
   return (
     <StyledContainer>
-      <StyledImage src={`${configData.GCS_BASEURL}/images/yokohama.jpg`} />
+      <StyledImage src={`${configData.GCS_BASEURL}/images/earth.jpg`} />
       <StyledContent>
-        <Heading content={"Experience"} color={"white"} />
-        <Experience color={"white"} />
+        <Heading content={"Activities"} color={"white"} />
+        <Activities color={"white"} />
       </StyledContent>
     </StyledContainer>
   );
 };
 
-export default Second;
+export default Third;

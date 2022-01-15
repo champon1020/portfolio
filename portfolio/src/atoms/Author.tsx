@@ -6,23 +6,23 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
-const StyledValue = styled.p`
+const StyledValue = styled.h4`
   font-size: 1.8rem;
+  padding: 0.1rem 0;
 `;
 
 type Props = {
-  startPeriod?: string;
-  endPeriod?: string;
+  value: string;
 };
 
-const Period = (props: Props) => {
-  const { startPeriod, endPeriod } = props;
+const Author = (props: Props) => {
+  const { value } = props;
 
   return (
     <StyledContainer>
-      <StyledValue>{`${startPeriod}-${endPeriod}`}</StyledValue>
+      <StyledValue>{value}</StyledValue>
     </StyledContainer>
   );
 };
 
-export default Period;
+export default Author;

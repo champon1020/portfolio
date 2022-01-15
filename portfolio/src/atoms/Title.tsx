@@ -7,22 +7,22 @@ const StyledContainer = styled.div`
 `;
 
 const StyledValue = styled.h4`
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: bold;
 `;
 
 type Props = {
-  workplace?: string;
+  value: string;
 };
 
-const Workplace = (props: Props) => {
-  const { workplace } = props;
+const Title = (props: Props) => {
+  const { value } = props;
 
   return (
     <StyledContainer>
-      <StyledValue>{workplace}</StyledValue>
+      <StyledValue>{value}</StyledValue>
     </StyledContainer>
   );
 };
 
-export default Workplace;
+export default Title;

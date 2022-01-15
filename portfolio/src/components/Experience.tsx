@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Content from "./Content";
+import ExperienceItem from "./ExperienceItem";
 
 const StyledContainer = styled.ul<{ color?: string }>`
   width: 100%;
@@ -17,52 +17,63 @@ const Experience = (props: Props) => {
 
   return (
     <StyledContainer color={color}>
-      <Content
+      <ExperienceItem
         workplace={
           "National Institute of Advanced Industrial Science and Technology (AIST)"
         }
         role={"Research Assistant"}
-        startPeriod={"2021/06"}
-        endPeriod={"Present"}
+        startMonth={"June"}
+        startYear={2021}
+        isPresent={true}
         discription={
           "Machine Learning, Computer Vision. I'm studying abound video scene graph generation."
         }
       />
-      <Content
+      <ExperienceItem
         workplace={"Mixi, Inc."}
         role={"Software Engineer"}
-        startPeriod={"2021/10"}
-        endPeriod={"2021/12"}
+        startMonth={"October"}
+        startYear={2021}
+        endMonth={"December"}
+        endYear={2021}
         discription={"Internship as backend engineer using C++."}
       />
-      <Content
+      <ExperienceItem
         workplace={"Mercari, Inc."}
         role={"Software Engineer"}
-        startPeriod={"2021/08"}
-        endPeriod={"2021/09"}
+        startMonth={"August"}
+        startYear={2021}
+        endMonth={"September"}
+        endYear={2021}
         discription={"Summer internship as backend engineer at Merpay."}
       />
-      <Content
+      <ExperienceItem
         workplace={"Mercari, Inc."}
         role={"Software Engineer"}
-        startPeriod={"2020/09"}
-        endPeriod={"2020/09"}
+        startMonth={"September"}
+        startYear={2020}
+        endMonth={"September"}
+        endYear={2020}
         discription={"Online Summer Internship for Gophers 2020."}
       />
-      <Content
+      <ExperienceItem
         workplace={"TeamLab"}
         role={"Software Engineer"}
-        startPeriod={"2019/09"}
-        endPeriod={"2019/09"}
+        startMonth={"September"}
+        startYear={2019}
+        endMonth={"September"}
+        endYear={2019}
         discription={
           "Summer internship as frontend engineer using Typescript and Vue."
         }
       />
-      <Content
+      <ExperienceItem
         workplace={"Nojima Infotech"}
         role={"Software Engineer"}
-        startPeriod={"2019/03"}
-        endPeriod={"2019/10"}
+        startMonth={"March"}
+        startYear={2019}
+        endMonth={"October"}
+        endYear={2019}
         discription={""}
       />
     </StyledContainer>

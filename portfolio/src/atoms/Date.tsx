@@ -2,26 +2,28 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  width: 100%;
   height: 100%;
+  width: 100%;
 `;
 
 const StyledValue = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  padding: 0.1rem 0;
 `;
 
 type Props = {
-  discription?: string;
+  month: string;
+  year: number;
 };
 
-const Discription = (props: Props) => {
-  const { discription } = props;
+const Date = (props: Props) => {
+  const { month, year } = props;
 
   return (
     <StyledContainer>
-      <StyledValue>{discription}</StyledValue>
+      <StyledValue>{`${month}, ${year}`}</StyledValue>
     </StyledContainer>
   );
 };
 
-export default Discription;
+export default Date;
