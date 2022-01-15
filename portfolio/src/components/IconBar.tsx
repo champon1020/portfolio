@@ -20,8 +20,16 @@ const linkList = [
     url: configData.LINKS.LINKEDIN,
   },
   {
-    src: `${configData.GCS_BASEURL}/icons/twitter2.png`,
+    src: `${configData.GCS_BASEURL}/icons/twitter.png`,
     url: configData.LINKS.TWITTER,
+  },
+  {
+    src: `${configData.GCS_BASEURL}/icons/zenn.jpg`,
+    url: configData.LINKS.ZENN,
+  },
+  {
+    src: `${configData.GCS_BASEURL}/icons/connpass.png`,
+    url: configData.LINKS.CONNPASS,
   },
 ];
 
