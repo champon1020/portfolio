@@ -1,0 +1,42 @@
+[
+  {
+    "organization": "National Institute of Advanced Industrial Science and Technology (AIST)",
+    "role": "Research Assistant",
+    "startDate": "June 2021",
+    "description": "Machine Learning, Computer Vision. I'm studying about video scene graph generation."
+  },
+  {
+    "organization": "Mixi, Inc.",
+    "role": "Software Engineer",
+    "startDate": "October 2021",
+    "endDate": "December 2021",
+    "description": "Internship as backend engineer using C++."
+  },
+  {
+    "organization": "Mercari, Inc.",
+    "role": "Software Engineer",
+    "startDate": "August 2021",
+    "endDate": "September 2021",
+    "description": "Summer internship as backend engineer at Merpay. Presentation: <a href=\"https://speakerdeck.com/champon1020/mercari-summer-internship-2021-final-presentation\" target=\"_blank\">link</a>"
+  },
+  {
+    "organization": "Mercari, Inc.",
+    "role": "Software Engineer",
+    "startDate": "September 2020",
+    "endDate": "September 2020",
+    "description": "Online Summer Internship for Gophers 2020 (5days).)"
+  },
+  {
+    "organization": "TeamLab",
+    "role": "Software Engineer",
+    "startDate": "September 2019",
+    "endDate": "September 2019",
+    "description": "Summer internship as frontend engineer using Typescript and Vue."
+  },
+  {
+    "organization": "Nojima Infotech",
+    "role": "Software Engineer",
+    "startDate": "March 2019",
+    "endDate": "October 2019"
+  }
+]

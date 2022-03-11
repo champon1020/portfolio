@@ -40,13 +40,13 @@ StyledHeading.defaultProps = {
   display: "inline-block",
   fontSize: "5rem",
   width: "100%",
-  textAlign: "none",
+  textAlign: "unset",
   color: "black",
   margin: "0",
-  position: "none",
+  position: "unset",
   hover: {
     opacity: 1,
-    cursor: "none",
+    cursor: "unset",
   },
 };
 

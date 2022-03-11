@@ -1,0 +1,16 @@
+[
+  {
+    "journal": "精密工学会誌",
+    "title": "動画内の音と映像によるイベント推定タスクにおける時間方向クロスモーダルアテンションの導入",
+    "authors": ["長崎 好輝", "林 昌希", "金子 直史", "青木 義満"],
+    "date": "2022年3月",
+    "volume": "(採録決定)"
+  },
+  {
+    "journal": "The 7th IIEEJ International Conference on Image Electronics and Visual Computing (IEVC2021)",
+    "title": "Temporal Cross-Modal Attention for Audio-Visual Event Localization",
+    "authors": ["Yoshiki Nagasaki", "Masaki Hayashi", "Naoshi Kaneko", "Yoshimitsu Aoki"],
+    "date": "September 2021",
+    "volume": "1P-11"
+  }
+]

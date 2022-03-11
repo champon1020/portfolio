@@ -1,32 +1,52 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
 
 import NavigationItem from "./NavigationItem";
 
-const StyledNavigation = styled.div`
+type StyleProps = {
+  height?: string;
+  lineHeight?: string;
+  width?: string;
+  backgroundColor?: string;
+};
+
+const StyledNavigation = styled.div<StyleProps>`
   display: flex;
-  line-height: 8rem;
-  height: 8rem;
-  width: 100%;
-  background-color: transparent;
   position: fixed;
   z-index: 999;
+  line-height: ${(props) => props.lineHeight};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  background-color: ${(props) => props.backgroundColor};
 `;
 
-const StyledNavigationItem = styled.div`
-  margin: 0 2rem;
-`;
+type Props = {
+  style?: StyleProps;
+};
 
-const Navigation = () => {
+const Navigation = (props: Props) => {
   return (
-    <StyledNavigation>
-      <StyledNavigationItem>
-        <NavigationItem text="Experience" to="experience" />
-      </StyledNavigationItem>
-      <StyledNavigationItem>
-        <NavigationItem text="Education" to="education" />
-      </StyledNavigationItem>
+    <StyledNavigation {...props.style}>
+      <NavigationItem
+        text="Experience"
+        to="experience"
+        style={{ margin: "0 2rem" }}
+      />
+      <NavigationItem
+        text="Education"
+        to="education"
+        style={{ margin: "0 2rem" }}
+      />
+      <NavigationItem
+        text="Publication"
+        to="publication"
+        style={{ margin: "0 2rem" }}
+      />
+      <NavigationItem
+        text="Workshop"
+        to="workshop"
+        style={{ margin: "0 2rem" }}
+      />
     </StyledNavigation>
   );
 };

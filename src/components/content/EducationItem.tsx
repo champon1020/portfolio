@@ -15,14 +15,15 @@ const StyledItem = styled.div<StyleProps>`
 
 type Props = {
   organization: string;
-  role: string;
+  degree: string;
+  department: string;
   startDate: string;
   endDate?: string;
   description?: string;
   style?: StyleProps;
 };
 
-const ExperienceItem = (props: Props) => {
+const EducationItem = (props: Props) => {
   return (
     <StyledItem {...props.style}>
       <div style={{ width: "35%" }}>
@@ -40,7 +41,7 @@ const ExperienceItem = (props: Props) => {
           style={{ fontWeight: "bold", fontSize: "2.2rem" }}
         />
         <Text
-          text={props.role}
+          text={`${props.degree}, ${props.department}`}
           style={{ fontSize: "1.8rem", margin: "0.5rem 0 0" }}
         />
         <ParsedText
@@ -52,4 +53,4 @@ const ExperienceItem = (props: Props) => {
   );
 };
 
-export default ExperienceItem;
+export default EducationItem;

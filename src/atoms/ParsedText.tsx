@@ -8,34 +8,32 @@ type StyleProps = {
   color?: string;
 };
 
-const StyledText = styled.div<StyleProps>`
+const StyledParsedText = styled.div<StyleProps>`
   font-size: ${(props) => props?.fontSize};
   font-weight: ${(props) => props?.fontWeight};
   margin: ${(props) => props?.margin};
   color: ${(props) => props?.color};
-  &:hover a {
+  & a {
+    color: ${(props) => props?.color};
+    text-decoration: underline;
+  }
+  & a:hover {
     opacity: 0.8;
   }
 `;
 
 type Props = {
   text: string;
-  link?: string;
   style?: StyleProps;
 };
 
-const Text = (props: Props) => {
-  if (props.link) {
-    return (
-      <StyledText {...props.style}>
-        <a href={props.link} target={"_blank"}>
-          {props.text}
-        </a>
-      </StyledText>
-    );
-  }
-
-  return <StyledText {...props.style}>{props.text}</StyledText>;
+const ParsedText = (props: Props) => {
+  return (
+    <StyledParsedText
+      {...props.style}
+      dangerouslySetInnerHTML={{ __html: props.text }}
+    />
+  );
 };
 
-export default Text;
+export default ParsedText;
