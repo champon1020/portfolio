@@ -15,6 +15,7 @@ type StyleProps = {
   left?: string;
   right?: string;
   bottom?: string;
+  zIndex?: number;
   hover?: { opacity?: number; cursor?: string };
 };
 
@@ -30,25 +31,12 @@ const StyledHeading = styled.h3<StyleProps>`
   left: ${(props) => props?.left};
   right: ${(props) => props?.right};
   bottom: ${(props) => props?.bottom};
+  z-index: ${(props) => props?.zIndex};
   &:hover {
     opacity: ${(props) => props?.hover?.opacity};
     cursor: ${(props) => props?.hover?.cursor};
   }
 `;
-
-StyledHeading.defaultProps = {
-  display: "inline-block",
-  fontSize: "5rem",
-  width: "100%",
-  textAlign: "unset",
-  color: "black",
-  margin: "0",
-  position: "unset",
-  hover: {
-    opacity: 1,
-    cursor: "unset",
-  },
-};
 
 type Props = {
   text: string;

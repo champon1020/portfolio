@@ -31,18 +31,18 @@ const EducationItem = (props: Props) => {
           text={`${props.startDate} - ${
             props.endDate ? props.endDate : "Present"
           }`}
-          style={{ fontSize: "1.8rem" }}
+          style={{ fontSize: "1.6rem" }}
         />
       </div>
       <div style={{ width: "1%" }} />
       <div style={{ width: "64%" }}>
         <Text
           text={props.organization}
-          style={{ fontWeight: "bold", fontSize: "2.2rem" }}
+          style={{ fontWeight: "bold", fontSize: "2.0rem" }}
         />
         <Text
           text={`${props.degree}, ${props.department}`}
-          style={{ fontSize: "1.8rem", margin: "0.5rem 0 0" }}
+          style={{ fontSize: "1.6rem", margin: "0.5rem 0 0" }}
         />
         <ParsedText
           text={props.description}

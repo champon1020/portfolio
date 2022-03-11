@@ -29,9 +29,9 @@ const SymposiumItem = (props: Props) => {
   const journalProperty = (date: string, volume: string, page: string) => {
     const res = [];
     {
-      volume ? res.push(volume) : "";
-      page ? res.push(page) : "";
-      date ? res.push(date) : "";
+      volume ? res.push(volume) : null;
+      page ? res.push(page) : null;
+      date ? res.push(date) : null;
     }
     return res.join(", ");
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 
 import ParsedText from "../../atoms/ParsedText";
@@ -14,34 +14,33 @@ const StyledItem = styled.div<StyleProps>`
 `;
 
 type Props = {
-  organization: string;
-  role: string;
-  startDate: string;
-  endDate?: string;
+  title: string;
+  date: string;
   description?: string;
   style?: StyleProps;
 };
 
-const ExperienceItem = (props: Props) => {
+const ActivityItem = (props: Props) => {
+  const journalProperty = (date: string, volume: string, page: string) => {
+    const res = [];
+    {
+      volume ? res.push(volume) : null;
+      page ? res.push(page) : null;
+      date ? res.push(date) : null;
+    }
+    return res.join(", ");
+  };
+
   return (
     <StyledItem {...props.style}>
       <div style={{ width: "35%" }}>
-        <Text
-          text={`${props.startDate} - ${
-            props.endDate ? props.endDate : "Present"
-          }`}
-          style={{ fontSize: "1.6rem" }}
-        />
+        <Text text={props.date} style={{ fontSize: "1.6rem" }} />
       </div>
       <div style={{ width: "1%" }} />
       <div style={{ width: "64%" }}>
         <Text
-          text={props.organization}
+          text={props.title}
           style={{ fontWeight: "bold", fontSize: "2.0rem" }}
-        />
-        <Text
-          text={props.role}
-          style={{ fontSize: "1.6rem", margin: "0.5rem 0 0" }}
         />
         <ParsedText
           text={props.description}
@@ -52,4 +51,4 @@ const ExperienceItem = (props: Props) => {
   );
 };
 
-export default ExperienceItem;
+export default ActivityItem;

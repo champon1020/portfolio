@@ -36,3 +36,9 @@ export type SymposiumType = {
   page?: string;
   description?: string;
 };
+
+export type ActivityType = {
+  title: string;
+  date: string;
+  description?: string;
+};

@@ -47,6 +47,11 @@ const Navigation = (props: Props) => {
         to="workshop"
         style={{ margin: "0 2rem" }}
       />
+      <NavigationItem
+        text="Activity"
+        to="activity"
+        style={{ margin: "0 2rem" }}
+      />
     </StyledNavigation>
   );
 };
