@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import HeadingText from "../../atoms/HeadingText";
@@ -23,20 +23,39 @@ type Props<D> = {
 };
 
 const Content = <D,>(props: Props<D>) => {
+  const [styleFlexDirection, setStyleFlexDirection] = useState("row");
+
+  const handleResize = () => {
+    if (screen.width > 768 && window.innerWidth > 768) {
+      setStyleFlexDirection("row");
+    } else {
+      setStyleFlexDirection("column");
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+  }, []);
+
   return (
     <StyledContent {...props.style}>
       <HeadingText
         text={props.headingText}
         style={{
           display: "block",
-          fontSize: "5rem",
+          fontSize: "4vh",
           color: "black",
         }}
       />
       <>
         {props.data.map((data, i) => {
           return (
-            <props.item key={i} {...data} style={{ margin: "3rem 0 0" }} />
+            <props.item
+              key={i}
+              {...data}
+              style={{ margin: "3vh 0 0", flexDirection: styleFlexDirection }}
+            />
           );
         })}
       </>

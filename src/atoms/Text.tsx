@@ -28,7 +28,7 @@ const Text = (props: Props) => {
   if (props.link) {
     return (
       <StyledText {...props.style}>
-        <a href={props.link} target={"_blank"}>
+        <a href={props.link} target="_blank" rel="noreferrer">
           {props.text}
         </a>
       </StyledText>

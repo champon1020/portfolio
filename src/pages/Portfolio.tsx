@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Element, Link } from "react-scroll";
 import styled from "styled-components";
 
@@ -27,6 +26,26 @@ import {
   SymposiumType,
 } from "../types/types";
 
+const StyledContent = styled.div`
+  width: 55%;
+  margin: auto;
+  @media all and (min-width: 1280px) and (max-width: 1400px) {
+    width: 65%;
+  }
+  @media all and (min-width: 1024px) and (max-width: 1280px) {
+    width: 75%;
+  }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    width: 85%;
+  }
+  @media all and (min-width: 480px) and (max-width: 768px) {
+    width: 90%;
+  }
+  @media all and (max-width: 480px) {
+    width: 95%;
+  }
+`;
+
 interface HTMLEvent<T extends EventTarget> extends Event {
   target: T;
 }
@@ -51,7 +70,7 @@ const Portfolio = () => {
           display: "block",
           width: "100%",
           textAlign: "center",
-          fontSize: "10rem",
+          fontSize: "10vh",
           color: "white",
           position: "absolute",
           top: "30vh",
@@ -59,7 +78,7 @@ const Portfolio = () => {
         }}
       />
       <IconBar
-        style={{ margin: "60vh auto", width: "100%", position: "absolute" }}
+        style={{ margin: "60vh auto 0", width: "100%", position: "absolute" }}
       />
       <Image
         src={`${configData.GCS_BASEURL}/images/yokohama.jpg`}
@@ -70,46 +89,68 @@ const Portfolio = () => {
           height: "100%",
         }}
       />
-      <Element name="experience">
-        <Content<ExperienceType>
-          headingText={"Experience"}
-          data={experienceData}
-          item={ExperienceItem}
-          style={{ margin: "5rem auto 0", width: "55%", position: "relative" }}
-        />
-      </Element>
-      <Element name="education">
-        <Content<EducationType>
-          headingText={"Education"}
-          data={educationData}
-          item={EducationItem}
-          style={{ margin: "5rem auto 0", width: "55%", position: "relative" }}
-        />
-      </Element>
-      <Element name="publication">
-        <Content<PublicationType>
-          headingText={"Publication"}
-          data={publicationData}
-          item={PublicationItem}
-          style={{ margin: "5rem auto 0", width: "55%", position: "relative" }}
-        />
-      </Element>
-      <Element name="workshop">
-        <Content<SymposiumType>
-          headingText={"Workshop and Symposium"}
-          data={symposiumData}
-          item={SymposiumItem}
-          style={{ margin: "5rem auto 0", width: "55%", position: "relative" }}
-        />
-      </Element>
-      <Element name="activity">
-        <Content<ActivityType>
-          headingText={"Activity"}
-          data={activityDate}
-          item={ActivityItem}
-          style={{ margin: "5rem auto 0", width: "55%", position: "relative" }}
-        />
-      </Element>
+      <StyledContent>
+        <Element name="experience">
+          <Content<ExperienceType>
+            headingText={"Experience"}
+            data={experienceData}
+            item={ExperienceItem}
+            style={{
+              margin: "5vh 0",
+              width: "100%",
+              position: "relative",
+            }}
+          />
+        </Element>
+        <Element name="education">
+          <Content<EducationType>
+            headingText={"Education"}
+            data={educationData}
+            item={EducationItem}
+            style={{
+              margin: "5vh 0",
+              width: "100%",
+              position: "relative",
+            }}
+          />
+        </Element>
+        <Element name="publication">
+          <Content<PublicationType>
+            headingText={"Publication"}
+            data={publicationData}
+            item={PublicationItem}
+            style={{
+              margin: "5vh 0",
+              width: "100%",
+              position: "relative",
+            }}
+          />
+        </Element>
+        <Element name="workshop">
+          <Content<SymposiumType>
+            headingText={"Workshop and Symposium"}
+            data={symposiumData}
+            item={SymposiumItem}
+            style={{
+              margin: "5vh 0",
+              width: "100%",
+              position: "relative",
+            }}
+          />
+        </Element>
+        <Element name="activity">
+          <Content<ActivityType>
+            headingText={"Activity"}
+            data={activityDate}
+            item={ActivityItem}
+            style={{
+              margin: "5vh 0",
+              width: "100%",
+              position: "relative",
+            }}
+          />
+        </Element>
+      </StyledContent>
     </>
   );
 };

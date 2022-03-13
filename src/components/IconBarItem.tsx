@@ -39,7 +39,7 @@ const IconBarItem = (props: Props) => {
     <StyledItem {...props.style}>
       <Image
         src={`${configData.GCS_BASEURL}${props.iconSrc}`}
-        style={{ height: "6rem" }}
+        style={{ height: "6vh" }}
       />
     </StyledItem>
   );
