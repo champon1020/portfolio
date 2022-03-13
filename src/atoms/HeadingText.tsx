@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { Keyframes } from "styled-components";
 
 import GlobalFonts from "../GlobalFonts";
 
@@ -40,6 +40,8 @@ const StyledHeading = styled.h3<StyleProps>`
 
 type Props = {
   text: string;
+  id?: string;
+  className?: string;
   style?: StyleProps;
 };
 
@@ -47,7 +49,9 @@ const HeadingText = (props: Props) => {
   return (
     <>
       <GlobalFonts />
-      <StyledHeading {...props.style}>{props.text}</StyledHeading>
+      <StyledHeading id={props.id} className={props.className} {...props.style}>
+        {props.text}
+      </StyledHeading>
     </>
   );
 };

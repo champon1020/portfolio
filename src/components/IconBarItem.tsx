@@ -9,7 +9,7 @@ const SlideAnim = keyframes`
     transform: translateX(70vw);
   }
   to {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 `;
 
@@ -25,7 +25,6 @@ const StyledItem = styled.div<StyleProps>`
   margin: ${(props) => props.margin};
   animation: ${SlideAnim}
     ${(props) => `${Math.exp(props.i * 0.1)}s ease-in-out 0s`};
-  z-index: 999;
 `;
 
 type Props = {

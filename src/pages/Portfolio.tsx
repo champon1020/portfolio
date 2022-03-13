@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Element, Link } from "react-scroll";
 import styled from "styled-components";
 
@@ -51,21 +51,73 @@ interface HTMLEvent<T extends EventTarget> extends Event {
 }
 
 const Portfolio = () => {
-  /*
-  const onScroll = (e: HTMLEvent<HTMLDocument>) => {
-    console.log(e.target.documentElement.scrollHeight);
-    console.log(e.target.documentElement.scrollTop);
+  const handleOnScroll = () => {
+    const mainTitleElem = document.getElementById("main-title");
+    const iconBarElem = document.getElementById("icon-bar");
+    const navBarElem = document.getElementById("navigation-bar");
+    const navBarItemElems = document.getElementsByClassName(
+      "navigation-bar-item"
+    );
+    const scrollTopPercentage =
+      document.documentElement.scrollTop /
+      document.documentElement.clientHeight;
+    if (document.documentElement.scrollTop <= 636) {
+      mainTitleElem.style.top = `${30 + scrollTopPercentage * 70}vh`;
+    }
+    if (document.documentElement.scrollTop <= 424) {
+      iconBarElem.style.top = `${60 + scrollTopPercentage * 70}vh`;
+    }
+    if (document.documentElement.scrollTop < 901) {
+      navBarElem.style.backgroundColor = "transparent";
+      navBarElem.style.borderBottom = "transparent";
+      Array.from(navBarItemElems).map(
+        (e: HTMLElement) => (e.style.color = "white")
+      );
+    } else {
+      navBarElem.style.backgroundColor = "white";
+      navBarElem.style.borderBottom = "solid thin lightgray";
+      Array.from(navBarItemElems).map((e: HTMLElement) => {
+        e.style.color = "black";
+      });
+    }
+    //console.log(document.documentElement.scrollTop);
   };
-  window.addEventListener("scroll", onScroll);
-  */
+
+  useEffect(() => {
+    history.scrollRestoration = "manual";
+    window.addEventListener("scroll", handleOnScroll);
+  }, []);
 
   return (
     <>
       <Navigation
-        style={{ width: "100%", height: "6rem", lineHeight: "6rem" }}
+        id="navigation-bar"
+        texts={[
+          "Experience",
+          "Education",
+          "Publication",
+          "Workshop",
+          "Activity",
+        ]}
+        destinations={[
+          "experience",
+          "education",
+          "publication",
+          "workshop",
+          "activity",
+        ]}
+        style={{
+          justifyContent: "right",
+          width: "100%",
+          top: "0%",
+          right: "0%",
+          height: "6vh",
+          lineHeight: "6vh",
+        }}
       />
       <HeadingText
         text={"Yoshiki Nagasaki"}
+        id="main-title"
         style={{
           display: "block",
           width: "100%",
@@ -74,11 +126,19 @@ const Portfolio = () => {
           color: "white",
           position: "absolute",
           top: "30vh",
-          zIndex: 999,
+          margin: "auto",
+          zIndex: 998,
         }}
       />
       <IconBar
-        style={{ margin: "60vh auto 0", width: "100%", position: "absolute" }}
+        id="icon-bar"
+        style={{
+          margin: "auto",
+          width: "100%",
+          position: "absolute",
+          top: "60vh",
+          zIndex: 997,
+        }}
       />
       <Image
         src={`${configData.GCS_BASEURL}/images/yokohama.jpg`}

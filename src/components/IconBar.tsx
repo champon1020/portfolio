@@ -9,6 +9,8 @@ type StyleProps = {
   position?: string;
   width?: string;
   margin?: string;
+  top?: string;
+  zIndex?: number;
 };
 
 const StyledBar = styled.ul<StyleProps>`
@@ -18,16 +20,19 @@ const StyledBar = styled.ul<StyleProps>`
   position: ${(props) => props.position};
   width: ${(props) => props.width};
   margin: ${(props) => props.margin};
+  top: ${(props) => props.top};
+  z-index: ${(props) => props.zIndex};
 `;
 
 type Props = {
+  id?: string;
   style?: StyleProps;
 };
 
 const IconBar = (props: Props) => {
   return (
     <>
-      <StyledBar {...props.style}>
+      <StyledBar id={props.id} {...props.style}>
         {accountData.map((data, i) => {
           return (
             <IconBarItem key={i} {...data} style={{ i: i, margin: "0 2rem" }} />
