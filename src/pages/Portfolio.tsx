@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Element, Link } from "react-scroll";
 import styled from "styled-components";
 
+import MenuBlack from "../assets/icons/menu_black.svg";
+import MenuWhite from "../assets/icons/menu_white.svg";
 import HeadingText from "../atoms/HeadingText";
 import Image from "../atoms/Image";
 import ActivityItem from "../components/content/ActivityItem";
@@ -26,6 +28,8 @@ import {
   SymposiumType,
 } from "../types/types";
 
+const StyledBody = styled.div``;
+
 const StyledContent = styled.div`
   width: 55%;
   margin: auto;
@@ -46,46 +50,75 @@ const StyledContent = styled.div`
   }
 `;
 
-interface HTMLEvent<T extends EventTarget> extends Event {
-  target: T;
-}
-
 const Portfolio = () => {
+  const [dropdownNavigation, setDropdownNavigation] = useState(false);
+
   const handleOnScroll = () => {
     const mainTitleElem = document.getElementById("main-title");
     const iconBarElem = document.getElementById("icon-bar");
     const navBarElem = document.getElementById("navigation-bar");
+    const navBarDropdown = document.getElementById("navigation-bar-dropdown");
+    const navBarDropdownIcon = document.getElementById(
+      "navigation-bar-dropdown-icon"
+    );
     const navBarItemElems = document.getElementsByClassName(
       "navigation-bar-item"
     );
     const scrollTopPercentage =
       document.documentElement.scrollTop /
       document.documentElement.clientHeight;
-    if (document.documentElement.scrollTop <= 636) {
-      mainTitleElem.style.top = `${30 + scrollTopPercentage * 70}vh`;
-    }
-    if (document.documentElement.scrollTop <= 424) {
-      iconBarElem.style.top = `${60 + scrollTopPercentage * 70}vh`;
-    }
-    if (document.documentElement.scrollTop < 901) {
+    if (document.documentElement.scrollTop < 424) {
+      mainTitleElem.style.top = `${30 + scrollTopPercentage * 75}vh`;
+      iconBarElem.style.top = `${45 + scrollTopPercentage * 75}vh`;
+      if (navBarDropdownIcon != null) {
+        (navBarDropdownIcon as HTMLImageElement).src = MenuWhite;
+        navBarDropdown.style.backgroundColor = "transparent";
+        navBarDropdown.style.borderBottom = "transparent";
+      }
       navBarElem.style.backgroundColor = "transparent";
       navBarElem.style.borderBottom = "transparent";
       Array.from(navBarItemElems).map(
         (e: HTMLElement) => (e.style.color = "white")
       );
     } else {
+      if (navBarDropdownIcon != null) {
+        (navBarDropdownIcon as HTMLImageElement).src = MenuBlack;
+        navBarDropdown.style.backgroundColor = "white";
+        navBarDropdown.style.borderBottom = "solid thin lightgray";
+      }
       navBarElem.style.backgroundColor = "white";
       navBarElem.style.borderBottom = "solid thin lightgray";
       Array.from(navBarItemElems).map((e: HTMLElement) => {
         e.style.color = "black";
       });
     }
-    //console.log(document.documentElement.scrollTop);
+  };
+
+  const handleOnResize = () => {
+    if (window.screen.width <= 768 || window.innerWidth <= 768) {
+      setDropdownNavigation(true);
+      handleOnScroll();
+    } else {
+      setDropdownNavigation(false);
+      handleOnScroll();
+    }
+  };
+
+  const handleOnDropdownNavigation = () => {
+    const bodyElem = document.getElementById("body");
+    bodyElem.style.filter = "blur(4px)";
+  };
+
+  const handleOnDropupNavigation = () => {
+    const bodyElem = document.getElementById("body");
+    bodyElem.style.filter = "unset";
   };
 
   useEffect(() => {
     history.scrollRestoration = "manual";
+    handleOnResize();
     window.addEventListener("scroll", handleOnScroll);
+    window.addEventListener("resize", handleOnResize);
   }, []);
 
   return (
@@ -106,6 +139,9 @@ const Portfolio = () => {
           "workshop",
           "activity",
         ]}
+        dropdown={dropdownNavigation}
+        onDropdown={handleOnDropdownNavigation}
+        onDropup={handleOnDropupNavigation}
         style={{
           justifyContent: "right",
           width: "100%",
@@ -113,104 +149,110 @@ const Portfolio = () => {
           right: "0%",
           height: "6vh",
           lineHeight: "6vh",
+          zIndex: 999,
         }}
       />
-      <HeadingText
-        text={"Yoshiki Nagasaki"}
-        id="main-title"
-        style={{
-          display: "block",
-          width: "100%",
-          textAlign: "center",
-          fontSize: "10vh",
-          color: "white",
-          position: "absolute",
-          top: "30vh",
-          margin: "auto",
-          zIndex: 998,
-        }}
-      />
-      <IconBar
-        id="icon-bar"
-        style={{
-          margin: "auto",
-          width: "100%",
-          position: "absolute",
-          top: "60vh",
-          zIndex: 997,
-        }}
-      />
-      <Image
-        src={`${configData.GCS_BASEURL}/images/yokohama.jpg`}
-        style={{
-          opacity: 0.7,
-          position: "relative",
-          width: "100%",
-          height: "100%",
-        }}
-      />
-      <StyledContent>
-        <Element name="experience">
-          <Content<ExperienceType>
-            headingText={"Experience"}
-            data={experienceData}
-            item={ExperienceItem}
-            style={{
-              margin: "5vh 0",
-              width: "100%",
-              position: "relative",
-            }}
-          />
-        </Element>
-        <Element name="education">
-          <Content<EducationType>
-            headingText={"Education"}
-            data={educationData}
-            item={EducationItem}
-            style={{
-              margin: "5vh 0",
-              width: "100%",
-              position: "relative",
-            }}
-          />
-        </Element>
-        <Element name="publication">
-          <Content<PublicationType>
-            headingText={"Publication"}
-            data={publicationData}
-            item={PublicationItem}
-            style={{
-              margin: "5vh 0",
-              width: "100%",
-              position: "relative",
-            }}
-          />
-        </Element>
-        <Element name="workshop">
-          <Content<SymposiumType>
-            headingText={"Workshop and Symposium"}
-            data={symposiumData}
-            item={SymposiumItem}
-            style={{
-              margin: "5vh 0",
-              width: "100%",
-              position: "relative",
-            }}
-          />
-        </Element>
-        <Element name="activity">
-          <Content<ActivityType>
-            headingText={"Activity"}
-            data={activityDate}
-            item={ActivityItem}
-            style={{
-              margin: "5vh 0",
-              width: "100%",
-              position: "relative",
-            }}
-          />
-        </Element>
-      </StyledContent>
+      <div
+        id="body"
+        style={{ width: "100%", height: "100%", transition: ".3s" }}
+      >
+        <HeadingText
+          text={"Yoshiki Nagasaki"}
+          id="main-title"
+          style={{
+            display: "block",
+            width: "100%",
+            textAlign: "center",
+            fontSize: "8vh",
+            color: "white",
+            position: "absolute",
+            top: "30vh",
+            margin: "auto",
+            zIndex: 990,
+          }}
+        />
+        <IconBar
+          id="icon-bar"
+          style={{
+            margin: "auto",
+            width: "100%",
+            position: "absolute",
+            top: "45vh",
+            zIndex: 990,
+          }}
+        />
+        <Image
+          src={`${configData.GCS_BASEURL}/images/yokohama.jpg`}
+          style={{
+            opacity: 0.7,
+            position: "relative",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+        <StyledContent>
+          <Element name="experience">
+            <Content<ExperienceType>
+              headingText={"Experience"}
+              data={experienceData}
+              item={ExperienceItem}
+              style={{
+                margin: "5vh 0",
+                width: "100%",
+                position: "relative",
+              }}
+            />
+          </Element>
+          <Element name="education">
+            <Content<EducationType>
+              headingText={"Education"}
+              data={educationData}
+              item={EducationItem}
+              style={{
+                margin: "5vh 0",
+                width: "100%",
+                position: "relative",
+              }}
+            />
+          </Element>
+          <Element name="publication">
+            <Content<PublicationType>
+              headingText={"Publication"}
+              data={publicationData}
+              item={PublicationItem}
+              style={{
+                margin: "5vh 0",
+                width: "100%",
+                position: "relative",
+              }}
+            />
+          </Element>
+          <Element name="workshop">
+            <Content<SymposiumType>
+              headingText={"Workshop and Symposium"}
+              data={symposiumData}
+              item={SymposiumItem}
+              style={{
+                margin: "5vh 0",
+                width: "100%",
+                position: "relative",
+              }}
+            />
+          </Element>
+          <Element name="activity">
+            <Content<ActivityType>
+              headingText={"Activity"}
+              data={activityDate}
+              item={ActivityItem}
+              style={{
+                margin: "5vh 0",
+                width: "100%",
+                position: "relative",
+              }}
+            />
+          </Element>
+        </StyledContent>
+      </div>
     </>
   );
 };

@@ -6,6 +6,8 @@ import HeadingText from "../../atoms/HeadingText";
 
 type StyleProps = {
   margin?: string;
+  fontSize?: string;
+  color?: string;
   animation?: Keyframes;
   animationDuration?: string;
   animationDelay?: string;
@@ -25,6 +27,7 @@ type Props = {
   text: string;
   to: string;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   style?: StyleProps;
 };
 
@@ -33,11 +36,12 @@ const NavigationItem = (props: Props) => {
     <StyledNavigationItem {...props.style}>
       <Link to={props.to}>
         <HeadingText
+          onClick={props.onClick}
           className={props.className}
           text={props.text}
           style={{
-            fontSize: "4vh",
-            color: "white",
+            fontSize: props.style.fontSize,
+            color: props.style.color,
             hover: { opacity: 0.8, cursor: "pointer" },
           }}
         />

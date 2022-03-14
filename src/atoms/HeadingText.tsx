@@ -7,6 +7,7 @@ type StyleProps = {
   display?: string;
   width?: string;
   textAlign?: string;
+  textShadow?: string;
   fontSize?: string;
   color?: string;
   margin?: string;
@@ -23,6 +24,7 @@ const StyledHeading = styled.h3<StyleProps>`
   display: ${(props) => props?.display};
   width: ${(props) => props?.width};
   text-align: ${(props) => props?.textAlign};
+  text-shadow: ${(props) => props?.textShadow};
   font-size: ${(props) => props?.fontSize};
   color: ${(props) => props?.color};
   margin: ${(props) => props?.margin};
@@ -42,6 +44,7 @@ type Props = {
   text: string;
   id?: string;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   style?: StyleProps;
 };
 
@@ -49,7 +52,12 @@ const HeadingText = (props: Props) => {
   return (
     <>
       <GlobalFonts />
-      <StyledHeading id={props.id} className={props.className} {...props.style}>
+      <StyledHeading
+        id={props.id}
+        className={props.className}
+        onClick={props.onClick}
+        {...props.style}
+      >
         {props.text}
       </StyledHeading>
     </>
