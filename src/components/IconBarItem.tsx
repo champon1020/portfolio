@@ -25,6 +25,9 @@ const StyledItem = styled.div<StyleProps>`
   margin: ${(props) => props.margin};
   animation: ${SlideAnim}
     ${(props) => `${Math.exp(props.i * 0.1)}s ease-in-out 0s`};
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 type Props = {
@@ -36,10 +39,12 @@ type Props = {
 const IconBarItem = (props: Props) => {
   return (
     <StyledItem {...props.style}>
-      <Image
-        src={`${configData.GCS_BASEURL}${props.iconSrc}`}
-        style={{ height: "6vh" }}
-      />
+      <a href={props.url} target="_blank" rel="noreferrer">
+        <Image
+          src={`${configData.GCS_BASEURL}${props.iconSrc}`}
+          style={{ height: "6vh" }}
+        />
+      </a>
     </StyledItem>
   );
 };
