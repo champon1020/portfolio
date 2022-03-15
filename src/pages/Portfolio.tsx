@@ -12,6 +12,7 @@ import EducationItem from "../components/content/EducationItem";
 import ExperienceItem from "../components/content/ExperienceItem";
 import PublicationItem from "../components/content/PublicationItem";
 import SymposiumItem from "../components/content/SymposiumItem";
+import Footer from "../components/footer/Footer";
 import IconBar from "../components/IconBar";
 import Navigation from "../components/navigation/Navigation";
 import activityDate from "../configs/activity.json";
@@ -252,6 +253,13 @@ const Portfolio = () => {
             />
           </Element>
         </StyledContent>
+        <Footer
+          style={{
+            height: "10vh",
+            lineHeight: "10vh",
+            backgroundColor: "white",
+          }}
+        />
       </div>
     </>
   );

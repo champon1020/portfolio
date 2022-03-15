@@ -174,7 +174,7 @@ const Navigation = (props: Props) => {
             text={text}
             to={props.destinations[i]}
             style={{
-              fontSize: "4vh",
+              fontSize: "3vh",
               color: "white",
               margin: "0 1vh",
               animation: AnimSlideInDelay(`${-6 * i}vh`),
