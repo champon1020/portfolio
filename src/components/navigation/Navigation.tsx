@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
 import MenuWhite from "../../assets/icons/menu_white.svg";
+import HeadingText from "../../atoms/HeadingText";
 import Image from "../../atoms/Image";
 import NavigationItem from "./NavigationItem";
 
@@ -107,9 +108,21 @@ const Navigation = (props: Props) => {
           {...props.style}
           style={{ display: drop ? "none" : "unset" }}
         >
+          <HeadingText
+            id="navigation-bar-title"
+            text="Yoshiki Nagasaki"
+            style={{
+              display: "none",
+              fontSize: "3vh",
+              margin: "0 1vh",
+              position: "fixed",
+              zIndex: props.style.zIndex - 1,
+            }}
+          />
           <Image
             id={`${props.id}-dropdown-icon`}
             src={MenuWhite}
+            alt={"menu-icon"}
             onClick={handleOnClickDropdown}
             style={{
               position: "fixed",
@@ -165,27 +178,41 @@ const Navigation = (props: Props) => {
   }
 
   return (
-    <StyledNavigation id={props.id} {...props.style}>
-      {props.texts.map((text, i) => {
-        return (
-          <NavigationItem
-            className={`${props.id}-item`}
-            key={i}
-            text={text}
-            to={props.destinations[i]}
-            style={{
-              fontSize: "3vh",
-              color: "white",
-              margin: "0 1vh",
-              animation: AnimSlideInDelay(`${-6 * i}vh`),
-              animationDuration: "2.2s",
-              animationDelay: "0s",
-              animationTimingFunction: "ease",
-            }}
-          />
-        );
-      })}
-    </StyledNavigation>
+    <>
+      <HeadingText
+        id="navigation-bar-title"
+        text="Yoshiki Nagasaki"
+        style={{
+          display: "none",
+          fontSize: "3vh",
+          margin: "0 1vh",
+          position: "fixed",
+          zIndex: props.style.zIndex + 1,
+          lineHeight: props.style.lineHeight,
+        }}
+      />
+      <StyledNavigation id={props.id} {...props.style}>
+        {props.texts.map((text, i) => {
+          return (
+            <NavigationItem
+              className={`${props.id}-item`}
+              key={i}
+              text={text}
+              to={props.destinations[i]}
+              style={{
+                fontSize: "3vh",
+                color: "white",
+                margin: "0 1vh",
+                animation: AnimSlideInDelay(`${-6 * i}vh`),
+                animationDuration: "2.2s",
+                animationDelay: "0s",
+                animationTimingFunction: "ease",
+              }}
+            />
+          );
+        })}
+      </StyledNavigation>
+    </>
   );
 };
 

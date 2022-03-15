@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Portfolio from "./pages/Portfolio";
+const Portfolio = React.lazy(() => import("./pages/Portfolio"));
 
 const Router = () => {
   return (
@@ -14,9 +14,21 @@ const Router = () => {
 const App = () => {
   return (
     <>
-      <BrowserRouter basename="/">
-        <Router />
-      </BrowserRouter>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: "white",
+            }}
+          ></div>
+        }
+      >
+        <BrowserRouter basename="/">
+          <Router />
+        </BrowserRouter>
+      </Suspense>
     </>
   );
 };

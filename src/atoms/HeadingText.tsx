@@ -6,6 +6,7 @@ import GlobalFonts from "../GlobalFonts";
 type StyleProps = {
   display?: string;
   width?: string;
+  lineHeight?: string;
   textAlign?: string;
   textShadow?: string;
   fontSize?: string;
@@ -23,6 +24,7 @@ type StyleProps = {
 const StyledHeading = styled.h3<StyleProps>`
   display: ${(props) => props?.display};
   width: ${(props) => props?.width};
+  line-height: ${(props) => props?.lineHeight};
   text-align: ${(props) => props?.textAlign};
   text-shadow: ${(props) => props?.textShadow};
   font-size: ${(props) => props?.fontSize};

@@ -6,11 +6,13 @@ import HeadingText from "../../atoms/HeadingText";
 type StyleProps = {
   width?: string;
   margin?: string;
+  padding?: string;
   position?: string;
 };
 
 const StyledContent = styled.div<StyleProps>`
   margin: ${(props) => props?.margin};
+  padding: ${(props) => props?.padding};
   width: ${(props) => props?.width};
   position: ${(props) => props?.position};
 `;

@@ -5,6 +5,8 @@ import Text from "../../atoms/Text";
 import accountData from "../../configs/account.json";
 
 type StyleProps = {
+  fontSize?: string;
+  margin?: string;
   height?: string;
   lineHeight?: string;
   backgroundColor?: string;
@@ -16,7 +18,8 @@ const StyledFooter = styled.div<StyleProps>`
   width: 100%;
   border-top: solid thin lightgray;
   text-align: center;
-  font-size: 1.5vh;
+  font-size: ${(props) => props.fontSize};
+  margin: ${(props) => props.margin};
   height: ${(props) => props.height};
   line-height: ${(props) => props.lineHeight};
   background-color: ${(props) => props.backgroundColor};

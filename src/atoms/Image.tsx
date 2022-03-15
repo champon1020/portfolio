@@ -38,6 +38,7 @@ const StyledImage = styled.img<StyleProps>`
 
 type Props = {
   src: string;
+  alt: string;
   id?: string;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   style?: StyleProps;
@@ -48,6 +49,7 @@ const Image = (props: Props) => {
     <>
       <StyledImage
         src={props.src}
+        alt={props.alt}
         id={props.id}
         onClick={props.onClick}
         {...props.style}

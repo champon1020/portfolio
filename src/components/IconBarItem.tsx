@@ -42,6 +42,7 @@ const IconBarItem = (props: Props) => {
       <a href={props.url} target="_blank" rel="noreferrer">
         <Image
           src={`${configData.GCS_BASEURL}${props.iconSrc}`}
+          alt={props.iconSrc}
           style={{ height: "6vh" }}
         />
       </a>

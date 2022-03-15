@@ -1,22 +1,18 @@
 [
   {
-    "iconSrc": "/icons/github.png",
+    "iconSrc": "/icons/github.svg",
     "url": "https://github.com/champon1020"
   },
   {
-    "iconSrc": "/icons/linkedin.png",
+    "iconSrc": "/icons/linkedin.svg",
     "url": "https://www.linkedin.com/in/champon1020/"
   },
   {
-    "iconSrc": "/icons/twitter.png",
+    "iconSrc": "/icons/twitter.svg",
     "url": "https://twitter.com/champon1020"
   },
   {
-    "iconSrc": "/icons/zenn.jpg",
+    "iconSrc": "/icons/zenn.svg",
     "url": "https://zenn.dev/champon1020"
-  },
-  {
-    "iconSrc": "/icons/connpass.png",
-    "url":  "https://connpass.com/user/champon1020/"
   }
 ]
