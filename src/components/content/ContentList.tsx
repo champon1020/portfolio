@@ -3,6 +3,7 @@ import { Element } from "react-scroll";
 import styled from "styled-components";
 
 import activityDate from "../../configs/activity.json";
+import conferenceData from "../../configs/conference.json";
 import configData from "../../configs/config.json";
 import educationData from "../../configs/education.json";
 import experienceData from "../../configs/experience.json";
@@ -10,12 +11,14 @@ import publicationData from "../../configs/publication.json";
 import symposiumData from "../../configs/symposium.json";
 import {
   ActivityType,
+  ConferenceType,
   EducationType,
   ExperienceType,
   PublicationType,
   SymposiumType,
 } from "../../types/types";
 import ActivityItem from "./ActivityItem";
+import ConferenceItem from "./ConferenceItem";
 import Content from "./Content";
 import EducationItem from "./EducationItem";
 import ExperienceItem from "./ExperienceItem";
@@ -84,9 +87,17 @@ const ContentList = (props: Props) => {
           style={{ ...defaultContentStyle }}
         />
       </Element>
-      <Element name="workshop">
+      <Element name="conference">
+        <Content<ConferenceType>
+          headingText={"Conference and Workshop"}
+          data={conferenceData}
+          item={ConferenceItem}
+          style={{ ...defaultContentStyle }}
+        />
+      </Element>
+      <Element name="symposium">
         <Content<SymposiumType>
-          headingText={"Workshop and Symposium"}
+          headingText={"Symposium"}
           data={symposiumData}
           item={SymposiumItem}
           style={{ ...defaultContentStyle }}

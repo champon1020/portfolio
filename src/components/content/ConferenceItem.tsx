@@ -16,7 +16,7 @@ const StyledItem = styled.div<StyleProps>`
 `;
 
 type Props = {
-  symposium: string;
+  conference: string;
   title: string;
   link?: string;
   authors: string[];
@@ -27,8 +27,8 @@ type Props = {
   style?: StyleProps;
 };
 
-const SymposiumItem = (props: Props) => {
-  const symposiumProperty = (date: string, volume: string, page: string) => {
+const ConferenceItem = (props: Props) => {
+  const conferenceProperty = (date: string, volume: string, page: string) => {
     const res = [];
     {
       volume ? res.push(volume) : null;
@@ -47,7 +47,7 @@ const SymposiumItem = (props: Props) => {
           style={{ fontWeight: "bold", fontSize: "2.2vh" }}
         />
         <Text
-          text={`${props.symposium}, ${symposiumProperty(
+          text={`${props.conference}, ${conferenceProperty(
             props.date,
             props.volume,
             props.page
@@ -69,9 +69,9 @@ const SymposiumItem = (props: Props) => {
   return (
     <StyledItem {...props.style}>
       <div style={{ width: "35%" }}>
-        <Text text={props.symposium} style={{ fontSize: "1.6vh" }} />
+        <Text text={props.conference} style={{ fontSize: "1.6vh" }} />
         <Text
-          text={`${symposiumProperty(props.date, props.volume, props.page)}`}
+          text={`${conferenceProperty(props.date, props.volume, props.page)}`}
           style={{ fontSize: "1.6vh", margin: "0.5vh 0 0" }}
         />
       </div>
@@ -95,4 +95,4 @@ const SymposiumItem = (props: Props) => {
   );
 };
 
-export default SymposiumItem;
+export default ConferenceItem;

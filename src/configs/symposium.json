@@ -14,14 +14,6 @@
     "date": "December 2021"
   },
   {
-    "symposium": "CVPR'21 Workshop Competition",
-    "title": "Home Action Genome Challenge: Task2",
-    "link": "https://homeactiongenome.org/results.html",
-    "authors": ["Kensho Hara", "Yasufumi Kawano", "Yoshiki Nagasaki", "Qiu Yue", "Hirokatsu Kataoka"],
-    "date": "June 2021",
-    "description": "Presentation: <a href=\"https://homeactiongenome.org/assets/img/3rd/HomageChallenge_Task2_ThirdPlace_AIST&DENSO.pdf\" target=\"_blank\">link</a>"
-  },
-  {
     "symposium": "第27回画像センシングシンポジウム (SSII2021)",
     "title": "動画内の音と映像の対応付けタスクにおける時間方向アテンションの導入",
     "authors": ["長崎 好輝", "林 昌希", "金子 直史", "青木 義満"],

@@ -121,14 +121,16 @@ const Portfolio = () => {
           "Experience",
           "Education",
           "Publication",
-          "Workshop",
+          "Conference",
+          "Symposium",
           "Activity",
         ]}
         destinations={[
           "experience",
           "education",
           "publication",
-          "workshop",
+          "conference",
+          "symposium",
           "activity",
         ]}
         dropdown={dropdownNavigation}

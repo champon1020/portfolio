@@ -26,6 +26,17 @@ export type PublicationType = {
   description?: string;
 };
 
+export type ConferenceType = {
+  conference: string;
+  title: string;
+  link?: string;
+  authors: string[];
+  date: string;
+  volume?: string;
+  page?: string;
+  description?: string;
+};
+
 export type SymposiumType = {
   symposium: string;
   title: string;
